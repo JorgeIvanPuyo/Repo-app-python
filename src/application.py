@@ -6,12 +6,15 @@ data = f.load_file('./src/heroes.csv')
 
 @application.route("/")
 def index():
-    return jsonify({"response": "PRUEBA DESPLIEGUE BLUE/GREEN"})
     return jsonify(data)
 
 @application.route("/<string:id>")
 def heroe(id):
     return jsonify(data[id])
+
+@application.route("/health")
+def health():
+    return jsonify({"message": "pong"}), 200
 
 if __name__ == "__main__":
     application.run(host = "0.0.0.0", port = 5000, debug = True)
